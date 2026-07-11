@@ -7,29 +7,24 @@ import {
   FaCog,
   FaShieldAlt,
 } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   const menu = [
-    { icon: <FaHome />, title: "Dashboard" },
-    { icon: <FaUsers />, title: "Users" },
-    { icon: <FaBell />, title: "Alerts" },
-    { icon: <FaFileAlt />, title: "Activity Logs" },
-    { icon: <FaChartBar />, title: "Analytics" },
-    { icon: <FaCog />, title: "Settings" },
+    { icon: <FaHome />, title: "Dashboard", path: "/" },
+    { icon: <FaUsers />, title: "Users", path: "/users" },
+    { icon: <FaBell />, title: "Alerts", path: "/alerts" },
+    { icon: <FaFileAlt />, title: "Activity Logs", path: "/activity-logs" },
+    { icon: <FaChartBar />, title: "Analytics", path: "/analytics" },
+    { icon: <FaCog />, title: "Settings", path: "/settings" },
   ];
 
   return (
-    <aside className="w-72 min-h-screen bg-slate-900 text-white shadow-xl">
+    <aside className="w-72 min-h-screen bg-slate-900 text-white">
 
-      {/* Logo */}
       <div className="p-8 border-b border-slate-700">
-
         <div className="flex items-center gap-3">
-
-          <FaShieldAlt
-            size={35}
-            className="text-cyan-400"
-          />
+          <FaShieldAlt size={35} className="text-cyan-400" />
 
           <div>
             <h1 className="text-2xl font-bold">
@@ -40,29 +35,28 @@ const Sidebar = () => {
               Insider Threat Detection
             </p>
           </div>
-
         </div>
-
       </div>
-
-      {/* Menu */}
 
       <div className="mt-6 px-4">
 
         {menu.map((item, index) => (
-          <div
+          <NavLink
             key={index}
-            className="flex items-center gap-4 p-4 rounded-xl cursor-pointer
-            hover:bg-cyan-500 hover:text-white transition duration-300
-            mb-2"
+            to={item.path}
+            className={({ isActive }) =>
+              `flex items-center gap-4 p-4 rounded-xl mb-2 transition ${
+                isActive
+                  ? "bg-cyan-500"
+                  : "hover:bg-slate-700"
+              }`
+            }
           >
             {item.icon}
 
-            <span className="font-medium">
-              {item.title}
-            </span>
+            <span>{item.title}</span>
 
-          </div>
+          </NavLink>
         ))}
 
       </div>
